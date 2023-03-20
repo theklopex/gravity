@@ -1,6 +1,5 @@
 #include <iostream>
-#include <Tuple.h>
-#include <Entity.h>
+#include <EntityList.h>
 
 
 
@@ -89,13 +88,17 @@ const double RADIUS_OF_CHARON =     606000.0;  // Pluto I
 
 int main(int argv, char** argc)
 {
-    Entity earth("Earth", 0,0,0, MASS_OF_EARTH, RADIUS_OF_EARTH);
-    Entity moon("Moon", 384400000, 0, 0, MASS_OF_MOON, RADIUS_OF_MOON);
+    EntityList entityList;
+
+    entityList.addEntity("Earth", 0,0,0, MASS_OF_EARTH, RADIUS_OF_EARTH);
+    entityList.addEntity("Moon", 384400000, 0, 0, MASS_OF_MOON, RADIUS_OF_MOON);
+    //Entity earth("Earth", 0,0,0, MASS_OF_EARTH, RADIUS_OF_EARTH);
+    //Entity moon("Moon", 384400000, 0, 0, MASS_OF_MOON, RADIUS_OF_MOON);
     {
-      std::cout << earth << std::endl;
-      std::cout << moon << std::endl;
-      double distance = earth.distance(moon);
-      moon.move(1,-2,0);
+      std::cout << entityList << std::endl;
+      //std::cout << moon << std::endl;
+      //double distance = earth.distance(moon);
+      //moon.move(1,-2,0);
     }
     return 0;
 }

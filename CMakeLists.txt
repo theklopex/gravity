@@ -15,4 +15,7 @@ target_link_libraries(Gravity Entity)
 add_library(Vector Vector.cpp)
 target_link_libraries(Gravity Vector)
 
+add_library(EntityList EntityList.cpp)
+target_link_libraries(Gravity EntityList)
+
 add_subdirectory(test)
