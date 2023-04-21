@@ -3,6 +3,7 @@
 #define ENTITY_LIST_H
 
 #include <vector>
+#include <iostream>
 #include "Entity.h"
 
 class EntityList
@@ -20,8 +21,6 @@ public:
         iter = list.begin();
     }
 
-    
-
     void addEntity(std::string _name, int64_t _x, int64_t _y, int64_t _z, double _mass, double _radius)
     {
         // This will call the constructor for Entity and create it inside of the space in the vector.
@@ -32,8 +31,6 @@ public:
     {
         list.push_back(entity);
     }
-
-    
 
     friend std::ostream& operator<<(std::ostream& stream, const EntityList& entityList);
 
