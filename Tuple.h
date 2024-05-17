@@ -33,6 +33,31 @@ public:
         return ((x == other.x) && (y == other.y) && (z == other.z));
     }
 
+    Tuple operator+(const Tuple & obj)
+    {
+        Tuple res;
+        res.x = x + obj.x;
+        res.y = y + obj.y;
+        res.z = z + obj.z;
+        return res;
+    }
+
+    Tuple operator-(const Tuple & obj)
+    {
+        Tuple res;
+        res.x = x - obj.x;
+        res.y = y - obj.y;
+        res.z = z - obj.z;
+        return res;
+    }
+
+    void operator=(const Tuple & obj)
+    {
+        x = obj.x;
+        y = obj.y;
+        z = obj.z;
+    }
+
     inline void relocate(int64_t _x, int64_t _y, int64_t _z)
     {
         x = _x;

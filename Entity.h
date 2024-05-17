@@ -4,6 +4,7 @@
 #include <iostream>
 #include <string>
 #include "Tuple.h"
+#include "ForceVector.h"
 
 class Entity
 {
@@ -15,6 +16,7 @@ public:
     , location(_x, _y, _z)
     , mass(_mass)
     , radius(_radius)
+    , forceVector()
     {}
 
     double distance(Entity& entity) const
@@ -41,11 +43,24 @@ public:
 
     friend std::ostream& operator<<(std::ostream& stream, const Entity& entity);
 
-private:
+    void resetForce()
+    {
+        forceVector.set(0, 0, 0);
+    }
+
+    void addForce(const ForceVector & _forceVector)
+    {
+        forceVector = forceVector + _forceVector;
+    }
+
+public:
     std::string name;
+private:
     Tuple location;
     double mass;
     double radius;
+    // For each step, all of the forces being applied to an entity will be calculated.  It will be stored here.
+    ForceVector forceVector;
 };
 
 #endif //ENTITY_H

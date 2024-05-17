@@ -32,6 +32,8 @@ public:
         list.push_back(entity);
     }
 
+    void calculateForces(double secsToTranspire);
+
     friend std::ostream& operator<<(std::ostream& stream, const EntityList& entityList);
 
 private:

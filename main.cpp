@@ -1,6 +1,6 @@
 #include <iostream>
 #include <EntityList.h>
-
+#include <unistd.h>  // for sleep()
 
 
 
@@ -80,25 +80,48 @@ const double RADIUS_OF_TRITON =     1353400.0;  // Neptune I
 const double RADIUS_OF_CHARON =     606000.0;  // Pluto I
 
 
+void display(const EntityList & entityList)
+{
+    std::cout << "=====================================================" << std::endl;
+    std::cout << entityList << std::endl;
+}
+
+// Calculate the forces pulling on every entity and then move all entities.
+// secsToTranspire is the number of seconds to advance time/motion in this step.
+int step(EntityList & entityList, double secsToTranspire)
+{
+    // Reset all force vectors.
+    entityList.calculateForces(secsToTranspire);
+
+    return 0;
+}
 
 
+int run(EntityList & entityList)
+{
+    // How many seconds will pass per one loop
+    double secsPerLoop = 1;
+    int retval = 0;
 
-
+    while (retval == 0)
+    {
+        retval = step(entityList, secsPerLoop);
+        // Each loop will take one second of real time.
+        sleep(1);
+        display(entityList);
+    }
+    return 0;
+}
 
 
 int main(int argv, char** argc)
 {
     EntityList entityList;
 
+    // You should not have two entities with the same name.  That would break stuff.
+
     entityList.addEntity("Earth", 0,0,0, MASS_OF_EARTH, RADIUS_OF_EARTH);
+    // The moon is (on average) 384400000 meters away from the center of the Earth.
     entityList.addEntity("Moon", 384400000, 0, 0, MASS_OF_MOON, RADIUS_OF_MOON);
-    //Entity earth("Earth", 0,0,0, MASS_OF_EARTH, RADIUS_OF_EARTH);
-    //Entity moon("Moon", 384400000, 0, 0, MASS_OF_MOON, RADIUS_OF_MOON);
-    {
-      std::cout << entityList << std::endl;
-      //std::cout << moon << std::endl;
-      //double distance = earth.distance(moon);
-      //moon.move(1,-2,0);
-    }
-    return 0;
+    return run(entityList);
 }
